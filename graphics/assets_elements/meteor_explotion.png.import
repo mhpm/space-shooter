@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b21jyt2vtd5iu"
-path="res://.godot/imported/assets_030.png-f07ca75c87b4312e1123ae8cd78fd094.ctex"
+uid="uid://5gqfai8u5k8t"
+path="res://.godot/imported/meteor_explotion.png-ca63aefa654d91edf08fc4f03a81c1de.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://graphics/assets_elements/assets_030.png"
-dest_files=["res://.godot/imported/assets_030.png-f07ca75c87b4312e1123ae8cd78fd094.ctex"]
+source_file="res://graphics/assets_elements/meteor_explotion.png"
+dest_files=["res://.godot/imported/meteor_explotion.png-ca63aefa654d91edf08fc4f03a81c1de.ctex"]
 
 [params]
 

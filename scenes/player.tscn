@@ -3,9 +3,18 @@
 [ext_resource type="Texture2D" uid="uid://d0aywqrvcnmj4" path="res://graphics/assets_elements/ship-purple.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://okioub41sr24" path="res://scenes/player.gd" id="1_g2els"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_player"]
+radius = 32.0
+height = 80.0
+
 [node name="Player" type="Node2D" unique_id=1035746295]
 script = ExtResource("1_g2els")
 
 [node name="PlayerImage" type="Sprite2D" parent="." unique_id=225151892]
 scale = Vector2(0.5201342, 0.5201342)
 texture = ExtResource("1_3vyb7")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_player")
