@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cbyp1xwa5d3e1"]
 
-[ext_resource type="Script" path="res://scenes/level.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://wps0hpecyxnr" path="res://scenes/player.tscn" id="1_2q6dc"]
+[ext_resource type="Script" uid="uid://digf6opn11gpv" path="res://scenes/level.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://b3r2ki6n5o5u8" path="res://graphics/background.png" id="2_bg"]
-[ext_resource type="PackedScene" uid="uid://bvyg2m8r9pxld" path="res://scenes/touch_controls.tscn" id="3_touch"]
+[ext_resource type="PackedScene" uid="uid://bvyg2m8sapxld" path="res://scenes/touch_controls.tscn" id="3_touch"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
 bg_color = Color(0.08, 0.08, 0.14, 0.8)
@@ -28,25 +28,6 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xp_bg"]
-bg_color = Color(0.05, 0.05, 0.12, 0.85)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.3, 0.25, 0.55, 0.7)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xp_fill"]
-bg_color = Color(0.85, 0.75, 0.2, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pause"]
 bg_color = Color(0.1, 0.14, 0.22, 0.75)
 border_width_left = 2
@@ -70,6 +51,25 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xp_bg"]
+bg_color = Color(0.05, 0.05, 0.12, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.3, 0.25, 0.55, 0.7)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xp_fill"]
+bg_color = Color(0.85, 0.75, 0.2, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boss_bg"]
 bg_color = Color(0.1, 0.04, 0.08, 0.88)
@@ -142,30 +142,6 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_menu"]
-bg_color = Color(0.1, 0.16, 0.26, 0.85)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.25, 0.75, 0.95, 0.8)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_menu_pressed"]
-bg_color = Color(0.18, 0.28, 0.45, 0.95)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.6, 0.9, 1, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_ship"]
 bg_color = Color(0.08, 0.12, 0.2, 0.8)
 border_width_left = 1
@@ -190,25 +166,50 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_menu"]
+bg_color = Color(0.1, 0.16, 0.26, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.25, 0.75, 0.95, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_menu_pressed"]
+bg_color = Color(0.18, 0.28, 0.45, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.9, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="Level" type="Node2D" unique_id=1645305667]
 script = ExtResource("1_script")
 
 [node name="BG" type="Sprite2D" parent="." unique_id=704586882]
-position = Vector2(360, 640)
-scale = Vector2(1.365, 1.365)
+position = Vector2(358.34372, 634.2086)
+rotation = 1.5707964
+scale = Vector2(0.8204764, 0.8204763)
 texture = ExtResource("2_bg")
 
 [node name="Player" parent="." unique_id=1936603520 instance=ExtResource("1_2q6dc")]
 position = Vector2(360, 1080)
 
-[node name="SpawnTimer" type="Timer" parent="."]
+[node name="SpawnTimer" type="Timer" parent="." unique_id=423710384]
 one_shot = true
 
-[node name="TouchControls" parent="." instance=ExtResource("3_touch")]
+[node name="TouchControls" parent="." unique_id=2140945069 instance=ExtResource("3_touch")]
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1238683781]
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD" unique_id=401987571]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 90.0
@@ -217,20 +218,20 @@ theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 14
 theme_override_constants/margin_right = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MarginContainer" unique_id=1756000229]
 layout_mode = 2
 theme_override_constants/separation = 6
 
-[node name="TopRow" type="HBoxContainer" parent="HUD/MarginContainer/VBoxContainer"]
+[node name="TopRow" type="HBoxContainer" parent="HUD/MarginContainer/VBoxContainer" unique_id=1333634358]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="HealthLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer/TopRow"]
+[node name="HealthLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer/TopRow" unique_id=247143416]
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = "ESCUDO:"
 
-[node name="HealthBar" type="ProgressBar" parent="HUD/MarginContainer/VBoxContainer/TopRow"]
+[node name="HealthBar" type="ProgressBar" parent="HUD/MarginContainer/VBoxContainer/TopRow" unique_id=94682418]
 modulate = Color(0.2, 0.9, 1, 1)
 custom_minimum_size = Vector2(170, 16)
 layout_mode = 2
@@ -240,18 +241,18 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_fill")
 value = 100.0
 show_percentage = false
 
-[node name="ShieldBadge" type="Label" parent="HUD/MarginContainer/VBoxContainer/TopRow"]
+[node name="ShieldBadge" type="Label" parent="HUD/MarginContainer/VBoxContainer/TopRow" unique_id=131429917]
 visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0.3, 0.9, 1, 1)
 theme_override_font_sizes/font_size = 13
 text = "🛡 ACTIVO"
 
-[node name="Spacer" type="Control" parent="HUD/MarginContainer/VBoxContainer/TopRow"]
+[node name="Spacer" type="Control" parent="HUD/MarginContainer/VBoxContainer/TopRow" unique_id=1069883554]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="PauseButton" type="Button" parent="HUD/MarginContainer/VBoxContainer/TopRow"]
+[node name="PauseButton" type="Button" parent="HUD/MarginContainer/VBoxContainer/TopRow" unique_id=2099996091]
 custom_minimum_size = Vector2(42, 34)
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
@@ -260,36 +261,35 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pause_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_btn_pause")
 text = "⏸"
 
-[node name="SecondRow" type="HBoxContainer" parent="HUD/MarginContainer/VBoxContainer"]
+[node name="SecondRow" type="HBoxContainer" parent="HUD/MarginContainer/VBoxContainer" unique_id=907367039]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="LevelBadge" type="Label" parent="HUD/MarginContainer/VBoxContainer/SecondRow"]
+[node name="LevelBadge" type="Label" parent="HUD/MarginContainer/VBoxContainer/SecondRow" unique_id=167676079]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
 theme_override_font_sizes/font_size = 14
 text = "NVL 1"
 
-[node name="XPBar" type="ProgressBar" parent="HUD/MarginContainer/VBoxContainer/SecondRow"]
+[node name="XPBar" type="ProgressBar" parent="HUD/MarginContainer/VBoxContainer/SecondRow" unique_id=976578134]
 custom_minimum_size = Vector2(180, 8)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_xp_bg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xp_fill")
-value = 0.0
 show_percentage = false
 
-[node name="Spacer2" type="Control" parent="HUD/MarginContainer/VBoxContainer/SecondRow"]
+[node name="Spacer2" type="Control" parent="HUD/MarginContainer/VBoxContainer/SecondRow" unique_id=924568616]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="ScoreLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer/SecondRow"]
+[node name="ScoreLabel" type="Label" parent="HUD/MarginContainer/VBoxContainer/SecondRow" unique_id=1744528963]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.95, 1, 1)
 theme_override_font_sizes/font_size = 14
 text = "PUNTOS: 0"
 
-[node name="NotificationBanner" type="Label" parent="HUD"]
+[node name="NotificationBanner" type="Label" parent="HUD" unique_id=147403539]
 visible = false
 anchors_preset = 5
 anchor_left = 0.5
@@ -306,7 +306,7 @@ theme_override_font_sizes/font_size = 20
 text = "¡MEJORA OBTENIDA!"
 horizontal_alignment = 1
 
-[node name="BossHUD" type="VBoxContainer" parent="HUD"]
+[node name="BossHUD" type="VBoxContainer" parent="HUD" unique_id=1998054920]
 visible = false
 anchors_preset = 5
 anchor_left = 0.5
@@ -318,7 +318,7 @@ offset_bottom = 146.0
 grow_horizontal = 2
 theme_override_constants/separation = 4
 
-[node name="BossTitle" type="Label" parent="HUD/BossHUD"]
+[node name="BossTitle" type="Label" parent="HUD/BossHUD" unique_id=2103110233]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.35, 0.45, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
@@ -328,7 +328,7 @@ theme_override_font_sizes/font_size = 14
 text = "AMENAZA TITÁN // JEFE"
 horizontal_alignment = 1
 
-[node name="BossHealthBar" type="ProgressBar" parent="HUD/BossHUD"]
+[node name="BossHealthBar" type="ProgressBar" parent="HUD/BossHUD" unique_id=1372633844]
 custom_minimum_size = Vector2(400, 16)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_boss_bg")
@@ -337,7 +337,7 @@ max_value = 1200.0
 value = 1200.0
 show_percentage = false
 
-[node name="BossWarning" type="CenterContainer" parent="HUD"]
+[node name="BossWarning" type="CenterContainer" parent="HUD" unique_id=639589010]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -346,7 +346,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="WarningLabel" type="Label" parent="HUD/BossWarning"]
+[node name="WarningLabel" type="Label" parent="HUD/BossWarning" unique_id=2134452466]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.2, 0.2, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.95)
@@ -356,7 +356,7 @@ theme_override_font_sizes/font_size = 32
 text = "¡¡ ALERTA: JEFE EN CAMINO !!"
 horizontal_alignment = 1
 
-[node name="GameOverPanel" type="CenterContainer" parent="HUD"]
+[node name="GameOverPanel" type="CenterContainer" parent="HUD" unique_id=1708628465]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -364,11 +364,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/GameOverPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/GameOverPanel" unique_id=294320918]
 layout_mode = 2
 theme_override_constants/separation = 18
 
-[node name="Title" type="Label" parent="HUD/GameOverPanel/VBoxContainer"]
+[node name="Title" type="Label" parent="HUD/GameOverPanel/VBoxContainer" unique_id=1544615804]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
@@ -378,21 +378,21 @@ theme_override_font_sizes/font_size = 38
 text = "NAVE DESTRUIDA"
 horizontal_alignment = 1
 
-[node name="FinalScoreLabel" type="Label" parent="HUD/GameOverPanel/VBoxContainer"]
+[node name="FinalScoreLabel" type="Label" parent="HUD/GameOverPanel/VBoxContainer" unique_id=5231367]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
 theme_override_font_sizes/font_size = 20
 text = "PUNTUACIÓN FINAL: 0"
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="HUD/GameOverPanel/VBoxContainer"]
+[node name="Subtitle" type="Label" parent="HUD/GameOverPanel/VBoxContainer" unique_id=110071866]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
 theme_override_font_sizes/font_size = 18
 text = "Toca la pantalla o presiona:"
 horizontal_alignment = 1
 
-[node name="RestartButton" type="Button" parent="HUD/GameOverPanel/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="HUD/GameOverPanel/VBoxContainer" unique_id=1056129647]
 custom_minimum_size = Vector2(220, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -402,7 +402,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_restart_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_btn_restart")
 text = "🔄 REINTENTAR"
 
-[node name="VictoryPanel" type="CenterContainer" parent="HUD"]
+[node name="VictoryPanel" type="CenterContainer" parent="HUD" unique_id=335272135]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -410,11 +410,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/VictoryPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/VictoryPanel" unique_id=1727219824]
 layout_mode = 2
 theme_override_constants/separation = 18
 
-[node name="Title" type="Label" parent="HUD/VictoryPanel/VBoxContainer"]
+[node name="Title" type="Label" parent="HUD/VictoryPanel/VBoxContainer" unique_id=23991364]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2, 1, 0.6, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
@@ -424,21 +424,21 @@ theme_override_font_sizes/font_size = 44
 text = "¡¡ VICTORIA !!"
 horizontal_alignment = 1
 
-[node name="VictoryScoreLabel" type="Label" parent="HUD/VictoryPanel/VBoxContainer"]
+[node name="VictoryScoreLabel" type="Label" parent="HUD/VictoryPanel/VBoxContainer" unique_id=545771169]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 0.85, 0.2, 1)
 theme_override_font_sizes/font_size = 22
 text = "PUNTUACIÓN FINAL: 0"
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="HUD/VictoryPanel/VBoxContainer"]
+[node name="Subtitle" type="Label" parent="HUD/VictoryPanel/VBoxContainer" unique_id=2016025541]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.95, 1, 1)
 theme_override_font_sizes/font_size = 20
 text = "Has derrotado al Titán del Espacio"
 horizontal_alignment = 1
 
-[node name="RestartButton" type="Button" parent="HUD/VictoryPanel/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="HUD/VictoryPanel/VBoxContainer" unique_id=932764867]
 custom_minimum_size = Vector2(240, 50)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -448,7 +448,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_win_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_btn_win")
 text = "🚀 JUGAR DE NUEVO"
 
-[node name="PauseMenu" type="Control" parent="HUD"]
+[node name="PauseMenu" type="Control" parent="HUD" unique_id=1111872919]
 process_mode = 3
 visible = false
 layout_mode = 3
@@ -458,7 +458,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="HUD/PauseMenu"]
+[node name="ColorRect" type="ColorRect" parent="HUD/PauseMenu" unique_id=2090902684]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -467,7 +467,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.03, 0.06, 0.1, 0.82)
 
-[node name="CenterContainer" type="CenterContainer" parent="HUD/PauseMenu"]
+[node name="CenterContainer" type="CenterContainer" parent="HUD/PauseMenu" unique_id=2059980829]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -475,11 +475,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PauseMenu/CenterContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PauseMenu/CenterContainer" unique_id=1072328731]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Title" type="Label" parent="HUD/PauseMenu/CenterContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="HUD/PauseMenu/CenterContainer/VBoxContainer" unique_id=568033913]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.2, 0.85, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
@@ -489,21 +489,21 @@ theme_override_font_sizes/font_size = 36
 text = "JUEGO PAUSADO"
 horizontal_alignment = 1
 
-[node name="ShipSelectLabel" type="Label" parent="HUD/PauseMenu/CenterContainer/VBoxContainer"]
+[node name="ShipSelectLabel" type="Label" parent="HUD/PauseMenu/CenterContainer/VBoxContainer" unique_id=1607539164]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.8, 0.85, 0.9, 1)
 theme_override_font_sizes/font_size = 16
 text = "ELIGE TU NAVE:"
 horizontal_alignment = 1
 
-[node name="ShipButtons" type="GridContainer" parent="HUD/PauseMenu/CenterContainer/VBoxContainer"]
+[node name="ShipButtons" type="GridContainer" parent="HUD/PauseMenu/CenterContainer/VBoxContainer" unique_id=854182515]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 8
 columns = 2
 
-[node name="ShipPurpleBtn" type="Button" parent="HUD/PauseMenu/CenterContainer/VBoxContainer/ShipButtons"]
+[node name="ShipPurpleBtn" type="Button" parent="HUD/PauseMenu/CenterContainer/VBoxContainer/ShipButtons" unique_id=173733272]
 custom_minimum_size = Vector2(130, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
@@ -511,7 +511,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_btn_ship")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_ship_pressed")
 text = "💜 PÚRPURA"
 
-[node name="ShipBlueBtn" type="Button" parent="HUD/PauseMenu/CenterContainer/VBoxContainer/ShipButtons"]
+[node name="ShipBlueBtn" type="Button" parent="HUD/PauseMenu/CenterContainer/VBoxContainer/ShipButtons" unique_id=137470197]
 custom_minimum_size = Vector2(130, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
@@ -519,7 +519,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_btn_ship")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_ship_pressed")
 text = "💙 AZUL"
 
-[node name="ShipRedBtn" type="Button" parent="HUD/PauseMenu/CenterContainer/VBoxContainer/ShipButtons"]
+[node name="ShipRedBtn" type="Button" parent="HUD/PauseMenu/CenterContainer/VBoxContainer/ShipButtons" unique_id=1764562073]
 custom_minimum_size = Vector2(130, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
@@ -527,7 +527,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_btn_ship")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_ship_pressed")
 text = "🔴 ROJA"
 
-[node name="ShipRed2Btn" type="Button" parent="HUD/PauseMenu/CenterContainer/VBoxContainer/ShipButtons"]
+[node name="ShipRed2Btn" type="Button" parent="HUD/PauseMenu/CenterContainer/VBoxContainer/ShipButtons" unique_id=671398190]
 custom_minimum_size = Vector2(130, 40)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
@@ -535,11 +535,11 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_btn_ship")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_ship_pressed")
 text = "🔥 FÉNIX"
 
-[node name="Spacer" type="Control" parent="HUD/PauseMenu/CenterContainer/VBoxContainer"]
+[node name="Spacer" type="Control" parent="HUD/PauseMenu/CenterContainer/VBoxContainer" unique_id=1180008860]
 custom_minimum_size = Vector2(0, 6)
 layout_mode = 2
 
-[node name="ResumeButton" type="Button" parent="HUD/PauseMenu/CenterContainer/VBoxContainer"]
+[node name="ResumeButton" type="Button" parent="HUD/PauseMenu/CenterContainer/VBoxContainer" unique_id=936469409]
 custom_minimum_size = Vector2(230, 46)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -549,7 +549,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_menu_pressed")
 theme_override_styles/hover = SubResource("StyleBoxFlat_btn_menu")
 text = "▶ CONTINUAR"
 
-[node name="RestartButton" type="Button" parent="HUD/PauseMenu/CenterContainer/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="HUD/PauseMenu/CenterContainer/VBoxContainer" unique_id=1139100924]
 custom_minimum_size = Vector2(230, 46)
 layout_mode = 2
 size_flags_horizontal = 4
