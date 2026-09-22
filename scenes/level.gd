@@ -51,6 +51,9 @@ var _notification_tween: Tween = null
 var _current_score: int = 0
 
 func _ready() -> void:
+	# Forzar orientación vertical (Portrait) estricta en móviles
+	DisplayServer.screen_set_orientation(DisplayServer.SCREEN_PORTRAIT)
+	
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	_adjust_background()
 	get_viewport().size_changed.connect(_adjust_background)
