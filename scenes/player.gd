@@ -9,6 +9,8 @@ signal player_died
 @export var shoot_cooldown: float = 0.2
 @export var max_health: float = 100.0
 
+@export var is_autofire: bool = false
+
 var health: float = 100.0
 var is_dead: bool = false
 var is_invulnerable: bool = false
@@ -29,20 +31,23 @@ func _process(delta: float) -> void:
 	if is_dead:
 		return
 	
-	# Movimiento con flechas del teclado
+	# Movimiento con flechas del teclado o joystick virtual
 	var direction = Input.get_vector("left", "right", "up", "down")
 	if direction == Vector2.ZERO:
 		direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	position += direction * speed * delta
 	
-	# Limitar a los bordes de la pantalla (1280x720)
-	position.x = clamp(position.x, 40.0, 1240.0)
-	position.y = clamp(position.y, 50.0, 680.0)
+	# Limitar a los bordes de la pantalla verticalmente
+	var vp_size := get_viewport_rect().size
+	position.x = clamp(position.x, 35.0, vp_size.x - 35.0)
+	position.y = clamp(position.y, 80.0, vp_size.y - 70.0)
 
-	# Disparo con tecla Space
+	# Disparo con tecla Space, botón táctil o disparo continuo (Autofire)
 	_shoot_timer -= delta
 	var wants_to_shoot: bool = false
-	if Input.is_action_just_pressed("shoot") or Input.is_action_just_pressed("ui_accept"):
+	if is_autofire and _shoot_timer <= 0.0:
+		wants_to_shoot = true
+	elif Input.is_action_just_pressed("shoot") or Input.is_action_just_pressed("ui_accept"):
 		wants_to_shoot = true
 	elif (Input.is_action_pressed("shoot") or Input.is_action_pressed("ui_accept")) and _shoot_timer <= 0.0:
 		wants_to_shoot = true
@@ -50,6 +55,9 @@ func _process(delta: float) -> void:
 	if wants_to_shoot:
 		shoot()
 		_shoot_timer = shoot_cooldown
+
+func set_autofire(enabled: bool) -> void:
+	is_autofire = enabled
 
 func shoot() -> void:
 	if not laser_scene or is_dead:

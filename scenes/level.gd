@@ -4,14 +4,22 @@ extends Node2D
 @export var boss_scene: PackedScene = preload("res://scenes/boss.tscn")
 @export var boss_spawn_delay: float = 5.0 # Segundos de meteoros antes de la llegada del Jefe
 
+@onready var bg: Sprite2D = $BG
 @onready var player: Node2D = $Player
+@onready var touch_controls: CanvasLayer = get_node_or_null("TouchControls")
 @onready var health_bar: ProgressBar = $HUD/MarginContainer/HBoxContainer/HealthBar
 @onready var health_label: Label = $HUD/MarginContainer/HBoxContainer/HealthLabel
+@onready var pause_button: Button = $HUD/MarginContainer/HBoxContainer/PauseButton
 @onready var game_over_panel: Control = $HUD/GameOverPanel
+@onready var game_over_restart_btn: Button = $HUD/GameOverPanel/VBoxContainer/RestartButton
 @onready var victory_panel: Control = $HUD/VictoryPanel
+@onready var victory_restart_btn: Button = $HUD/VictoryPanel/VBoxContainer/RestartButton
 @onready var boss_hud: Control = $HUD/BossHUD
 @onready var boss_health_bar: ProgressBar = $HUD/BossHUD/BossHealthBar
 @onready var boss_warning: Control = $HUD/BossWarning
+@onready var pause_menu: Control = $HUD/PauseMenu
+@onready var pause_resume_btn: Button = $HUD/PauseMenu/CenterContainer/VBoxContainer/ResumeButton
+@onready var pause_restart_btn: Button = $HUD/PauseMenu/CenterContainer/VBoxContainer/RestartButton
 @onready var spawn_timer: Timer = $SpawnTimer
 
 var is_game_over: bool = false
@@ -20,13 +28,18 @@ var boss_spawned: bool = false
 var current_boss: Area2D = null
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	# Ajuste dinámico del fondo al tamaño del viewport
+	_adjust_background()
+	get_viewport().size_changed.connect(_adjust_background)
+	
 	# Configurar barra de vida del jugador
 	if health_bar:
 		health_bar.min_value = 0
 		health_bar.max_value = 100
 		health_bar.value = 100
 	
-	# Ocultar paneles de fin de partida y HUD de jefe al inicio
+	# Ocultar paneles de fin de partida, HUD de jefe y menú de pausa
 	if game_over_panel:
 		game_over_panel.visible = false
 	if victory_panel:
@@ -35,6 +48,26 @@ func _ready() -> void:
 		boss_hud.visible = false
 	if boss_warning:
 		boss_warning.visible = false
+	if pause_menu:
+		pause_menu.visible = false
+	
+	# Conectar botones táctiles de reinicio
+	if game_over_restart_btn:
+		game_over_restart_btn.pressed.connect(_restart_game)
+	if victory_restart_btn:
+		victory_restart_btn.pressed.connect(_restart_game)
+	
+	# Conectar sistema de pausa
+	if pause_button:
+		pause_button.pressed.connect(_on_pause_pressed)
+	if pause_resume_btn:
+		pause_resume_btn.pressed.connect(_on_resume_pressed)
+	if pause_restart_btn:
+		pause_restart_btn.pressed.connect(_restart_game)
+	
+	# Conectar controles táctiles con el jugador
+	if touch_controls and player and player.has_method("set_autofire"):
+		touch_controls.autofire_toggled.connect(player.set_autofire)
 	
 	# Conectar señales del jugador
 	if player:
@@ -52,10 +85,46 @@ func _ready() -> void:
 	# Programar la llegada del Jefe
 	_schedule_boss_arrival()
 
+func _adjust_background() -> void:
+	if not bg or not bg.texture:
+		return
+	var vp_size := get_viewport_rect().size
+	bg.position = vp_size / 2.0
+	var tex_size := bg.texture.get_size()
+	var s := maxf(vp_size.x / tex_size.x, vp_size.y / tex_size.y)
+	bg.scale = Vector2(s, s)
+
 func _unhandled_input(event: InputEvent) -> void:
-	if (is_game_over or is_victory) and event is InputEventKey and event.pressed:
-		if event.keycode == KEY_R or event.physical_keycode == KEY_R:
-			get_tree().reload_current_scene()
+	if is_game_over or is_victory:
+		if event is InputEventKey and event.pressed:
+			if event.keycode == KEY_R or event.physical_keycode == KEY_R:
+				_restart_game()
+		elif (event is InputEventScreenTouch and event.pressed) or (event is InputEventMouseButton and event.pressed):
+			_restart_game()
+	elif event is InputEventKey and event.pressed:
+		if event.keycode == KEY_P or event.keycode == KEY_ESCAPE:
+			if get_tree().paused:
+				_on_resume_pressed()
+			else:
+				_on_pause_pressed()
+
+func _on_pause_pressed() -> void:
+	get_tree().paused = true
+	if touch_controls:
+		touch_controls.visible = false
+	if pause_menu:
+		pause_menu.visible = true
+
+func _on_resume_pressed() -> void:
+	get_tree().paused = false
+	if touch_controls:
+		touch_controls.visible = true
+	if pause_menu:
+		pause_menu.visible = false
+
+func _restart_game() -> void:
+	get_tree().paused = false
+	get_tree().reload_current_scene()
 
 func _schedule_boss_arrival() -> void:
 	await get_tree().create_timer(boss_spawn_delay).timeout
@@ -116,8 +185,9 @@ func _spawn_meteor() -> void:
 	if is_game_over or is_victory or not meteor_scene:
 		return
 	
+	var vp_width := get_viewport_rect().size.x
 	var meteor := meteor_scene.instantiate()
-	meteor.position = Vector2(randf_range(60.0, 1220.0), -60.0)
+	meteor.position = Vector2(randf_range(40.0, vp_width - 40.0), -60.0)
 	add_child(meteor)
 	
 	_start_next_spawn()
@@ -136,6 +206,8 @@ func _on_boss_health_changed(current: float, max_h: float) -> void:
 
 func _on_boss_died() -> void:
 	is_victory = true
+	if touch_controls:
+		touch_controls.visible = false
 	if spawn_timer:
 		spawn_timer.stop()
 	
@@ -171,6 +243,8 @@ func _on_player_health_changed(current: float, max_h: float) -> void:
 
 func _on_player_died() -> void:
 	is_game_over = true
+	if touch_controls:
+		touch_controls.visible = false
 	if spawn_timer:
 		spawn_timer.stop()
 	

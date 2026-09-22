@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scenes/level.gd" id="1_script"]
 [ext_resource type="PackedScene" uid="uid://wps0hpecyxnr" path="res://scenes/player.tscn" id="1_2q6dc"]
 [ext_resource type="Texture2D" uid="uid://b3r2ki6n5o5u8" path="res://graphics/background.png" id="2_bg"]
+[ext_resource type="PackedScene" uid="uid://bvyg2m8r9pxld" path="res://scenes/touch_controls.tscn" id="3_touch"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg"]
 bg_color = Color(0.08, 0.08, 0.14, 0.8)
@@ -27,6 +28,30 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pause"]
+bg_color = Color(0.1, 0.14, 0.22, 0.75)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.7, 0.95, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_pause_pressed"]
+bg_color = Color(0.18, 0.25, 0.4, 0.9)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 0.85, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_boss_bg"]
 bg_color = Color(0.1, 0.04, 0.08, 0.88)
 border_width_left = 2
@@ -50,43 +75,117 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_restart"]
+bg_color = Color(0.8, 0.18, 0.28, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.4, 0.5, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_restart_pressed"]
+bg_color = Color(0.95, 0.25, 0.35, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.8, 0.85, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_win"]
+bg_color = Color(0.12, 0.65, 0.4, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.95, 0.65, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_win_pressed"]
+bg_color = Color(0.18, 0.8, 0.5, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8, 1, 0.9, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_menu"]
+bg_color = Color(0.1, 0.16, 0.26, 0.85)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.25, 0.75, 0.95, 0.8)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_menu_pressed"]
+bg_color = Color(0.18, 0.28, 0.45, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.9, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="Level" type="Node2D" unique_id=1645305667]
 script = ExtResource("1_script")
 
 [node name="BG" type="Sprite2D" parent="." unique_id=704586882]
-position = Vector2(645.3878, 357.5)
-scale = Vector2(0.8129649, 0.8129649)
+position = Vector2(360, 640)
+scale = Vector2(1.365, 1.365)
 texture = ExtResource("2_bg")
 
 [node name="Player" parent="." unique_id=1936603520 instance=ExtResource("1_2q6dc")]
-position = Vector2(640, 580)
+position = Vector2(360, 1080)
 
 [node name="SpawnTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="TouchControls" parent="." instance=ExtResource("3_touch")]
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="MarginContainer" type="MarginContainer" parent="HUD"]
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 60.0
+offset_bottom = 64.0
 grow_horizontal = 2
-theme_override_constants/margin_left = 30
-theme_override_constants/margin_top = 25
-theme_override_constants/margin_right = 30
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUD/MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 12
 
 [node name="HealthLabel" type="Label" parent="HUD/MarginContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 18
+theme_override_font_sizes/font_size = 16
 text = "ESCUDO:"
 
 [node name="HealthBar" type="ProgressBar" parent="HUD/MarginContainer/HBoxContainer"]
 modulate = Color(0.2, 0.9, 1, 1)
-custom_minimum_size = Vector2(260, 20)
+custom_minimum_size = Vector2(180, 18)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_bg")
@@ -94,15 +193,28 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_fill")
 value = 100.0
 show_percentage = false
 
+[node name="Spacer" type="Control" parent="HUD/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PauseButton" type="Button" parent="HUD/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(44, 38)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_pause")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_pause_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_pause")
+text = "⏸"
+
 [node name="BossHUD" type="VBoxContainer" parent="HUD"]
 visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -220.0
-offset_top = 18.0
-offset_right = 220.0
-offset_bottom = 64.0
+offset_left = -200.0
+offset_top = 68.0
+offset_right = 200.0
+offset_bottom = 114.0
 grow_horizontal = 2
 theme_override_constants/separation = 4
 
@@ -112,12 +224,12 @@ theme_override_colors/font_color = Color(1, 0.35, 0.45, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 14
 text = "AMENAZA TITÁN // JEFE"
 horizontal_alignment = 1
 
 [node name="BossHealthBar" type="ProgressBar" parent="HUD/BossHUD"]
-custom_minimum_size = Vector2(440, 16)
+custom_minimum_size = Vector2(400, 16)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_boss_bg")
 theme_override_styles/fill = SubResource("StyleBoxFlat_boss_fill")
@@ -140,7 +252,7 @@ theme_override_colors/font_color = Color(1, 0.2, 0.2, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.95)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 42
+theme_override_font_sizes/font_size = 32
 text = "¡¡ ALERTA: JEFE EN CAMINO !!"
 horizontal_alignment = 1
 
@@ -154,7 +266,7 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD/GameOverPanel"]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 18
 
 [node name="Title" type="Label" parent="HUD/GameOverPanel/VBoxContainer"]
 layout_mode = 2
@@ -162,16 +274,26 @@ theme_override_colors/font_color = Color(1, 0.3, 0.3, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
 theme_override_constants/shadow_offset_x = 2
 theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 38
 text = "NAVE DESTRUIDA"
 horizontal_alignment = 1
 
 [node name="Subtitle" type="Label" parent="HUD/GameOverPanel/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
-theme_override_font_sizes/font_size = 22
-text = "Presiona [ R ] para reiniciar"
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 18
+text = "Toca la pantalla o presiona:"
 horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="HUD/GameOverPanel/VBoxContainer"]
+custom_minimum_size = Vector2(220, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_restart")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_restart_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_restart")
+text = "🔄 REINTENTAR"
 
 [node name="VictoryPanel" type="CenterContainer" parent="HUD"]
 visible = false
@@ -183,7 +305,7 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUD/VictoryPanel"]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 18
 
 [node name="Title" type="Label" parent="HUD/VictoryPanel/VBoxContainer"]
 layout_mode = 2
@@ -191,20 +313,82 @@ theme_override_colors/font_color = Color(0.2, 1, 0.6, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
 theme_override_constants/shadow_offset_x = 3
 theme_override_constants/shadow_offset_y = 3
-theme_override_font_sizes/font_size = 52
+theme_override_font_sizes/font_size = 44
 text = "¡¡ VICTORIA !!"
 horizontal_alignment = 1
 
 [node name="Subtitle" type="Label" parent="HUD/VictoryPanel/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.95, 1, 1)
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 20
 text = "Has derrotado al Titán del Espacio"
 horizontal_alignment = 1
 
-[node name="RestartPrompt" type="Label" parent="HUD/VictoryPanel/VBoxContainer"]
+[node name="RestartButton" type="Button" parent="HUD/VictoryPanel/VBoxContainer"]
+custom_minimum_size = Vector2(240, 50)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.8, 0.8, 0.8, 1)
+size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 20
-text = "Presiona [ R ] para volver a jugar"
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_win")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_win_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_win")
+text = "🚀 JUGAR DE NUEVO"
+
+[node name="PauseMenu" type="Control" parent="HUD"]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="HUD/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.03, 0.06, 0.1, 0.8)
+
+[node name="CenterContainer" type="CenterContainer" parent="HUD/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/PauseMenu/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="HUD/PauseMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.85, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.9)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 38
+text = "JUEGO PAUSADO"
 horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="HUD/PauseMenu/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(220, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_menu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_menu_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_menu")
+text = "▶ CONTINUAR"
+
+[node name="RestartButton" type="Button" parent="HUD/PauseMenu/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(220, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_menu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_btn_menu_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_btn_menu")
+text = "🔄 REINICIAR"

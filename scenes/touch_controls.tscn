@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://bvyg2m8sapxld"]
+
+[ext_resource type="Script" path="res://scenes/touch_controls.gd" id="1_script"]
+[ext_resource type="Script" path="res://scenes/virtual_joystick.gd" id="2_joystick"]
+[ext_resource type="Script" path="res://scenes/touch_button.gd" id="3_button"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_auto_normal"]
+bg_color = Color(0.08, 0.12, 0.2, 0.6)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.6, 0.9, 0.6)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_auto_pressed"]
+bg_color = Color(0.2, 0.18, 0.05, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 0.85, 0.2, 0.9)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="TouchControls" type="CanvasLayer"]
+layer = 10
+script = ExtResource("1_script")
+
+[node name="VirtualJoystick" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -220.0
+offset_right = 200.0
+offset_bottom = -60.0
+grow_vertical = 0
+script = ExtResource("2_joystick")
+
+[node name="ShootButton" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -200.0
+offset_right = -40.0
+offset_bottom = -60.0
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("3_button")
+
+[node name="AutoFireButton" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -265.0
+offset_right = -50.0
+offset_bottom = -225.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_auto_normal")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_auto_pressed")
+theme_override_styles/hover = SubResource("StyleBoxFlat_auto_normal")
+toggle_mode = true
+text = "AUTO: OFF"

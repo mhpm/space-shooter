@@ -41,8 +41,8 @@ func _process(delta: float) -> void:
 	position.x += drift_x * delta
 	rotation += rotation_speed * delta
 	
-	# Destruir si sale completamente de la pantalla
-	if position.y > 800 or position.x < -150 or position.x > 1430:
+	# Destruir si sale completamente de la pantalla vertical
+	if position.y > 1380 or position.x < -150 or position.x > 870:
 		queue_free()
 
 func _on_area_entered(area: Area2D) -> void:

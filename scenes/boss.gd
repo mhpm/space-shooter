@@ -21,7 +21,7 @@ var is_dead: bool = false
 
 # Movimiento y patrullaje
 var patrol_direction: float = 1.0
-var target_y: float = 195.0
+var target_y: float = 230.0
 var move_time: float = 0.0
 
 # Sistema de esquiva (Dodge)
@@ -46,7 +46,8 @@ func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	
 	# Iniciar fuera de pantalla y entrar con animación fluida
-	position = Vector2(640, -220)
+	var center_x := get_viewport_rect().size.x / 2.0
+	position = Vector2(center_x, -220)
 	var intro_tween = create_tween()
 	intro_tween.tween_property(self, "position:y", target_y, 2.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	intro_tween.finished.connect(_on_intro_finished)
@@ -73,12 +74,14 @@ func _update_movement(delta: float) -> void:
 	# Oscilación vertical flotante
 	position.y = target_y + sin(move_time * 2.2) * 18.0
 	
-	# Rebotar en los márgenes de pantalla (resolución 1280x720)
-	if position.x > 1060.0:
-		position.x = 1060.0
+	# Rebotar en los márgenes de pantalla vertical (resolución 720x1280)
+	var max_x := get_viewport_rect().size.x - 150.0
+	var min_x := 150.0
+	if position.x > max_x:
+		position.x = max_x
 		patrol_direction = -1.0
-	elif position.x < 220.0:
-		position.x = 220.0
+	elif position.x < min_x:
+		position.x = min_x
 		patrol_direction = 1.0
 	
 	# Desaceleración de la esquiva
@@ -106,18 +109,19 @@ func _update_dodge(delta: float) -> void:
 				break
 
 func _perform_dodge(laser_offset_x: float) -> void:
+	var vp_w := get_viewport_rect().size.x
 	# Esquivar en la dirección opuesta al láser o hacia el centro de la pantalla
 	var dir := 1.0
 	if abs(laser_offset_x) > 5.0:
 		dir = -sign(laser_offset_x)
 	else:
 		# Si está perfectamente centrado, esquivar hacia el centro de la pantalla
-		dir = 1.0 if position.x < 640.0 else -1.0
+		dir = 1.0 if position.x < (vp_w / 2.0) else -1.0
 	
 	# Evitar esquivar hacia la pared si ya estamos cerca del borde
-	if position.x > 980.0:
+	if position.x > vp_w - 180.0:
 		dir = -1.0
-	elif position.x < 300.0:
+	elif position.x < 180.0:
 		dir = 1.0
 	
 	dodge_velocity_x = dir * dodge_speed * (1.2 if phase == 2 else 1.0)
