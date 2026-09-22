@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c6ex8u3y7q1nm"]
 
 [ext_resource type="Script" path="res://scenes/explosion.gd" id="1_script"]
-[ext_resource type="Texture2D" uid="uid://5gqfai8u5k8t" path="res://graphics/assets_elements/meteor_explotion.png" id="2_texture"]
+[ext_resource type="Texture2D" path="res://graphics/assets_elements/asteroids, meteors and bombs/meteor_explotion.png" id="2_texture"]
 
 [node name="Explosion" type="Node2D"]
 script = ExtResource("1_script")

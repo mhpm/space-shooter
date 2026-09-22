@@ -1,7 +1,7 @@
 [gd_scene format=3]
 
 [ext_resource type="Script" path="res://scenes/laser.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://graphics/assets_elements/lazer.png" id="2_texture"]
+[ext_resource type="Texture2D" path="res://graphics/assets_elements/lazers/assets_008.png" id="2_texture"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1"]
 radius = 8.0

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://wps0hpecyxnr"]
 
-[ext_resource type="Texture2D" uid="uid://d0aywqrvcnmj4" path="res://graphics/assets_elements/ship-purple.png" id="1_3vyb7"]
+[ext_resource type="Texture2D" path="res://graphics/assets_elements/ships/ship-purple.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://okioub41sr24" path="res://scenes/player.gd" id="1_g2els"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_player"]
