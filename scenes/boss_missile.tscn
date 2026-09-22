@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://vxwn5om6gwrk"]
+
+[ext_resource type="Script" path="res://scenes/boss_missile.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://graphics/boos_elements/boos_056.png" id="2_texture"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_missile"]
+radius = 16.0
+height = 60.0
+
+[node name="BossMissile" type="Area2D"]
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("2_texture")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707963
+shape = SubResource("CapsuleShape2D_missile")

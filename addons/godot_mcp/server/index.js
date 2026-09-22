@@ -13,60 +13,74 @@ const {
 } = require("@modelcontextprotocol/sdk/types.js");
 const { WebSocketServer } = require("ws");
 
-const PORT = parseInt(process.env.GODOT_MCP_PORT || "6505", 10);
+const START_PORT = parseInt(process.env.GODOT_MCP_PORT || "6505", 10);
+const MAX_PORT = 6514;
 
 // State
 let godotSocket = null;
 let nextRequestId = 1;
 const pendingRequests = new Map(); // id -> { resolve, reject, timeout }
 
-// Start WebSocket Server for Godot
-const wss = new WebSocketServer({ port: PORT, host: "127.0.0.1" });
+// Start WebSocket Server for Godot with automatic port fallback (6505-6514)
+function startWebSocketServer(port) {
+  const wss = new WebSocketServer({ port, host: "127.0.0.1" });
 
-wss.on("listening", () => {
-  console.error(`[Godot-MCP] WebSocket server listening on ws://127.0.0.1:${PORT}`);
-});
-
-wss.on("connection", (ws) => {
-  console.error(`[Godot-MCP] Godot Editor connected on port ${PORT}`);
-  godotSocket = ws;
-
-  ws.on("message", (raw) => {
-    try {
-      const msg = JSON.parse(raw.toString());
-      
-      // Heartbeat ping
-      if (msg.method === "ping") {
-        ws.send(JSON.stringify({ jsonrpc: "2.0", method: "pong", params: {} }));
-        return;
-      }
-      if (msg.method === "pong") {
-        return;
-      }
-
-      // Handle response to a pending request
-      if (msg.id !== undefined && pendingRequests.has(msg.id)) {
-        const { resolve, timer } = pendingRequests.get(msg.id);
-        clearTimeout(timer);
-        pendingRequests.delete(msg.id);
-        resolve(msg);
-      }
-    } catch (err) {
-      console.error("[Godot-MCP] Error parsing message from Godot:", err);
+  wss.on("error", (err) => {
+    if (err.code === "EADDRINUSE" && port < MAX_PORT) {
+      console.error(`[Godot-MCP] Port ${port} is in use, retrying on port ${port + 1}...`);
+      startWebSocketServer(port + 1);
+    } else {
+      console.error(`[Godot-MCP] WebSocket error on port ${port}:`, err);
     }
   });
 
-  ws.on("close", () => {
-    console.error("[Godot-MCP] Godot Editor disconnected");
-    if (godotSocket === ws) {
-      godotSocket = null;
-    }
+  wss.on("listening", () => {
+    console.error(`[Godot-MCP] WebSocket server listening on ws://127.0.0.1:${port}`);
   });
 
-  ws.on("error", (err) => {
-    console.error("[Godot-MCP] WebSocket error:", err);
+  wss.on("connection", (ws) => {
+    console.error(`[Godot-MCP] Godot Editor connected on port ${port}`);
+    godotSocket = ws;
+
+    ws.on("message", (raw) => {
+      try {
+        const msg = JSON.parse(raw.toString());
+        
+        // Heartbeat ping
+        if (msg.method === "ping") {
+          ws.send(JSON.stringify({ jsonrpc: "2.0", method: "pong", params: {} }));
+          return;
+        }
+        if (msg.method === "pong") {
+          return;
+        }
+
+        // Handle response to a pending request
+        if (msg.id !== undefined && pendingRequests.has(msg.id)) {
+          const { resolve, timer } = pendingRequests.get(msg.id);
+          clearTimeout(timer);
+          pendingRequests.delete(msg.id);
+          resolve(msg);
+        }
+      } catch (err) {
+        console.error("[Godot-MCP] Error parsing message from Godot:", err);
+      }
+    });
+
+    ws.on("close", () => {
+      console.error(`[Godot-MCP] Godot Editor disconnected from port ${port}`);
+      if (godotSocket === ws) {
+        godotSocket = null;
+      }
+    });
+
+    ws.on("error", (err) => {
+      console.error("[Godot-MCP] Client WebSocket error:", err);
+    });
   });
-});
+}
+
+startWebSocketServer(START_PORT);
 
 /**
  * Send JSON-RPC request to Godot

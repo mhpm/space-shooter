@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bn6jc8ik0ni1u"]
+
+[ext_resource type="Script" path="res://scenes/boss.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://graphics/boos_elements/boos_001.png" id="2_texture"]
+
+[node name="Boss" type="Area2D"]
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 3.14159265
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_texture")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 105, -65, 80, -128, -10, -80, -95, 0, -75, 80, -95, 128, -10, 65, 80)
+
+[node name="CannonLeft" type="Marker2D" parent="."]
+position = Vector2(-65, 80)
+
+[node name="CannonRight" type="Marker2D" parent="."]
+position = Vector2(65, 80)
+
+[node name="CannonCenter" type="Marker2D" parent="."]
+position = Vector2(0, 105)
+
+[node name="MissileLeft" type="Marker2D" parent="."]
+position = Vector2(-105, 30)
+
+[node name="MissileRight" type="Marker2D" parent="."]
+position = Vector2(105, 30)

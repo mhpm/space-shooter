@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c8xbossxpl01"]
+
+[ext_resource type="Script" path="res://scenes/boss_explosion.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://graphics/boos_elements/boos_064.png" id="2_texture"]
+
+[node name="BossExplosion" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_texture")

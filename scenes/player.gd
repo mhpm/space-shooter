@@ -69,6 +69,19 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		take_damage(25.0)
 		if area.has_method("explode"):
 			area.explode()
+	elif area.is_in_group("boss_projectiles"):
+		var dmg: float = 15.0
+		if "damage" in area:
+			dmg = area.damage
+		take_damage(dmg)
+		if area.has_method("hit_player"):
+			area.hit_player()
+		elif area.has_method("explode"):
+			area.explode()
+		else:
+			area.queue_free()
+	elif area.is_in_group("boss"):
+		take_damage(30.0)
 
 func take_damage(amount: float) -> void:
 	if is_dead or is_invulnerable:

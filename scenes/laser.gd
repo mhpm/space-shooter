@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var speed: float = 700.0
+@export var damage: float = 25.0
 
 func _ready() -> void:
 	add_to_group("lasers")
